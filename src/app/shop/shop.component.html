@@ -41,11 +41,10 @@
           <div class="col-sm-8">
             <div class="shop-menu pull-right">
               <ul class="row">
-                <li><a href=""><i class="fa fa-user"></i> Account</a></li>
-                <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                <li><a  routerLink="/login"><i class="fa fa-lock"></i> Login</a></li>
+                <li *ngIf="isUserLogged()"><a routerLink="/account"><i class="fa fa-user"></i> Account</a></li>
+								<li><a routerLink="/shop"><i class="fa fa-crosshairs"></i> Home</a></li>
+								<li><a routerLink="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li *ngIf="!isUserLogged()"><a routerLink="/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
               </ul>
             </div>
           </div>
@@ -92,96 +91,6 @@
           <div class="left-sidebar">
             <h2>Category</h2>
             <div class="panel-group category-products" id="accordian">
-              <!--category-productsr-->
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-                      <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                      Sportswear
-                    </a>
-                  </h4>
-                </div>
-                <div id="sportswear" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <ul>
-                      <li><a href="">Nike </a></li>
-                      <li><a href="">Under Armour </a></li>
-                      <li><a href="">Adidas </a></li>
-                      <li><a href="">Puma</a></li>
-                      <li><a href="">ASICS </a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                      <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                      Mens
-                    </a>
-                  </h4>
-                </div>
-                <div id="mens" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <ul>
-                      <li><a href="">Fendi</a></li>
-                      <li><a href="">Guess</a></li>
-                      <li><a href="">Valentino</a></li>
-                      <li><a href="">Dior</a></li>
-                      <li><a href="">Versace</a></li>
-                      <li><a href="">Armani</a></li>
-                      <li><a href="">Prada</a></li>
-                      <li><a href="">Dolce and Gabbana</a></li>
-                      <li><a href="">Chanel</a></li>
-                      <li><a href="">Gucci</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
-                      <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                      Womens
-                    </a>
-                  </h4>
-                </div>
-                <div id="womens" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <ul>
-                      <li><a href="">Fendi</a></li>
-                      <li><a href="">Guess</a></li>
-                      <li><a href="">Valentino</a></li>
-                      <li><a href="">Dior</a></li>
-                      <li><a href="">Versace</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Kids</a></h4>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Fashion</a></h4>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Households</a></h4>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Interiors</a></h4>
-                </div>
-              </div>
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title"><a href="#">Clothing</a></h4>
@@ -204,14 +113,11 @@
               <!--brands_products-->
               <h2>Brands</h2>
               <div class="brands-name">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href=""> <span class="pull-right">(50)</span>Acne</a></li>
-                  <li><a href=""> <span class="pull-right">(56)</span>Grüne Erde</a></li>
-                  <li><a href=""> <span class="pull-right">(27)</span>Albiro</a></li>
-                  <li><a href=""> <span class="pull-right">(32)</span>Ronhill</a></li>
-                  <li><a href=""> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                  <li><a href=""> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                  <li><a href=""> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                <ul class="nav  nav-stacked">
+                  <li><a href=""> Acne</a></li>
+                  <li><a href=""> Grüne Erde</a></li>
+                  <li><a href=""> Albiro</a></li>
+                  <li><a href=""> Ronhill</a></li>
                 </ul>
               </div>
             </div>
@@ -242,11 +148,11 @@
             <!--features_items-->
             <h2 class="title text-center">Features Items</h2>
             <div class="card-group">
-              <div class="col-3" *ngFor="let item of items">
-                  <img class="card-img-top" src="https://images.ua.prom.st/1224668271_futbolka-bezlad-t-shirt.jpg" alt="Card image cap">
+              <div class="col-3" *ngFor="let item of items" >
+                  <img class="card-img-top" [src]="item.image" alt="Card image cap">
                   <div class="card-block">
-                    <h4 class="card-title">{{item}}</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title">{{item.name}}</h4>
+                    <p class="card-text">{{item.name}}</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                   </div>
               </div>

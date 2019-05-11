@@ -35,8 +35,6 @@ export class LoginComponent implements OnInit {
 
 
   registerUser(form: NgForm) {
-   
-
     const observer = {
       next: data => {
         localStorage.setItem("shopToken", data['access_token']);
@@ -54,5 +52,10 @@ this.snackBar.open("Error", "Ok", this.config);
     this.signUpUser.PasswordConfirmed = "";
     this.signUpUser.FirstName = "";
     this.signUpUser.LastName = "";
+  }
+
+  isUserLogged():boolean{
+    let a = localStorage.getItem("shopToken");
+return localStorage.getItem("shopToken") == null ? true : false;
   }
 }

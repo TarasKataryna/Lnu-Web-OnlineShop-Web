@@ -15,6 +15,7 @@ import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import { ShopComponent } from './shop/shop.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     AppComponent,
     MainComponent,
     LoginComponent,
-    ShopComponent
+    ShopComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
