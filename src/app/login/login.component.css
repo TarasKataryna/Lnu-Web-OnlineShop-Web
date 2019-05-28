@@ -1,0 +1,12 @@
+.navMenu {
+width: 100%;
+}
+
+.errorValidation{
+    border: solid !important;
+    border-color:rgb(255, 131, 131 ) !important;
+}
+
+background-red{
+    background-color: darkorchid !important;
+}

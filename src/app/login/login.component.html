@@ -1,0 +1,141 @@
+<!--/head-->
+
+<body>
+	<header id="header">
+		<!--header-->
+		<div class="header_top">
+			<!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone nav-item"></i> +2 95 01 88 821</a></li>
+								<li><a href=""><i class="fa fa-envelope nav-item"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="row">
+								<li><a href=""><i class="fa fa-facebook"></i></a></li>
+								<li><a href=""><i class="fa fa-twitter"></i></a></li>
+								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
+								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header_top-->
+
+		<div class="header-middle">
+			<!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a routerLink="/shop"><img src="../../assets/images/home/logo.png" alt="" /></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="row">
+								<li *ngIf="isUserLogged()"><a routerLink="/account"><i class="fa fa-user"></i> Account</a></li>
+								<li><a routerLink="/shop"><i class="fa fa-crosshairs"></i> Home</a></li>
+								<li><a routerLink="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li *ngIf="isUserLogged() == false"><a routerLink="/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header-middle-->
+
+		<div class="header-bottom">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" routerLink="/shop">Shop</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Cart</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Contact Us</a>
+							</li>
+						</ul>
+						<form class="form-inline my-2 my-lg-0">
+							<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+						</form>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--/header-bottom-->
+	</header>
+	<!--/header-->
+
+	<section id="form">
+		<!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form">
+						<!--login form-->
+						<h2>Login to your account</h2>
+						<form #logInForm="ngForm" (ngSubmit)="logIn(logInForm)">
+							<input type="email" [(ngModel)]="logInUser.Email" name="email"  placeholder="Email" />
+							<input type="password"  [(ngModel)]="logInUser.Password" name="password" placeholder="Password" />
+							<span>
+								<input type="checkbox" class="checkbox">
+								Keep me signed in
+							</span>
+							<button type="submit" class="btn btn-default">Login</button>
+						</form>
+					</div>
+					<!--/login form-->
+				</div>
+				<div class="col-sm-1">
+					<h2 class="or">OR</h2>
+				</div>
+				<div class="col-sm-4">
+					<div class="signup-form">
+						<!--sign up form-->
+						<h2>New User Signup!</h2>
+						<form #SignUpForm="ngForm" (ngSubmit)="registerUser(SignUpForm)">
+							<input type="email" [(ngModel)]="signUpUser.Email" class="form-control" placeholder="Email Address"
+								name="Email" required  #email="ngModel" [class.errorValidation]='email.errors && (email.dirty || email.touched)'/>
+							<input type="password" [(ngModel)]="signUpUser.Password" class="form-control" placeholder="Password"
+								name="Password" required minlength="5" #password="ngModel" [class.errorValidation]='password.errors && (password.dirty || password.touched)' />
+							<input type="password" [(ngModel)]="signUpUser.PasswordConfirmed" class="form-control"
+								name="ConfirmPassword" placeholder="Confirm Password" required minlength="5" #confirm="ngModel"  [class.errorValidation]='confirm.errors && (confirm.dirty || confirm.touched)'/>
+							<input type="text" [(ngModel)]="signUpUser.FirstName" class="form-control" name="FirstName"
+								placeholder="First Name" required #firstname="ngModel" [class.errorValidation]='firstname.errors && (firstname.dirty || firstname.touched)'/>
+							<input type="text" [(ngModel)]="signUpUser.LastName" class="form-control" name="LastName"
+								placeholder="Last Name" required #lastname="ngModel" [class.errorValidation]='lastname.errors && (lastname.dirty || lastname.touched)'/>
+							<button type="submit" class="btn btn-default">Signup</button>
+						</form>
+					</div>
+					<!--/sign up form-->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/form-->
+
+
+
+</body>
