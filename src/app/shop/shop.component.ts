@@ -13,68 +13,63 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.items = [];
-    this.itemsPhoto = [];
+    this.itemsToDisplay = [];
     this.getAllShirts();
-    /* this.items.push("aaaaaa");
-     this.items.push("bbbbbb");
-     this.items.push("cccccc");
-     this.items.push("dddddd");
-     this.items.push("eeeeee");*/
+    for (let i = 0; i < this.items.length; ++i) {
+      this.itemsToDisplay.push(this.items[i]);
+    }
   }
   public items: ShirtModel[];
-  public itemsPhoto;
+  public itemsToDisplay: ShirtModel[];
 
- b64toBlob(b64Data, contentType, sliceSize) {
-  contentType = contentType || '';
-  sliceSize = sliceSize || 512;
+  public hoodies;
+  public hoodiesToDisplay;
 
-  var byteCharacters = atob(b64Data);
-  var byteArrays = [];
+  b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
 
-  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
       var slice = byteCharacters.slice(offset, offset + sliceSize);
 
       var byteNumbers = new Array(slice.length);
       for (var i = 0; i < slice.length; i++) {
-          byteNumbers[i] = slice.charCodeAt(i);
+        byteNumbers[i] = slice.charCodeAt(i);
       }
 
       var byteArray = new Uint8Array(byteNumbers);
 
       byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
   }
 
-var blob = new Blob(byteArrays, {type: contentType});
-return blob;
-}
+  createImageFromBlob(image: Blob, index) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      let blob = reader.result;
+      this.items[index].image = URL.createObjectURL(blob);
+    }, false);
 
-createImageFromBlob(image: Blob,index) {
-  let reader = new FileReader();
-  reader.addEventListener("load", () => {
-    let blob= reader.result;
-     this.items[index].image = URL.createObjectURL(blob); 
-  }, false);
-
-  if (image) {
-     reader.readAsDataURL(image);
+    if (image) {
+      reader.readAsDataURL(image);
+    }
   }
- }
 
   getAllShirts() {
     const observer = {
       next: data => {
-        debugger;
         this.items = data;
-        for(let i=0;i<this.items.length;++i){
-        /* let a = this.b64toBlob(this.items[i].image.img,'data:image/png',512);let url =URL.createObjectURL(a);
-         this.items[i].image = new Image();
-         this.items[i].image.src = url.split(':')[2] + ':'+ url.split(':')[3]; 
-         this.items[i].image.src = url;*/
-
-         let a = 'data:image/png;base64,'+ this.items[i].image.img;
-         this.items[i].image = a;
-
+        for (let i = 0; i < this.items.length; ++i) {
+          let a = 'data:image/png;base64,' + this.items[i].image.img;
+          this.items[i].image = a;
         }
+
       },
       error: err => {
 
@@ -83,8 +78,41 @@ createImageFromBlob(image: Blob,index) {
     }
     this.shopService.getAllShirts().subscribe(observer);
   }
-  isUserLogged():boolean{
+
+  isUserLogged(): boolean {
     let a = localStorage.getItem("shopToken");
-return localStorage.getItem("shopToken") == null ? true : false;
+    return localStorage.getItem("shopToken") != null ? true : false;
+  }
+
+  getMenShirts() {
+    for (let i = 0; i < this.items.length; ++i) {
+      if(this.items[i].gender == 0)
+      this.itemsToDisplay.push(this.items[i]);
+    }
+  }
+
+  getWomenShirts() {
+    for (let i = 0; i < this.items.length; ++i) {
+      if(this.items[i].gender == 1)
+      this.itemsToDisplay.push(this.items[i]);
+    }
+  }
+
+  getHoodies(){
+    const observer = {
+      next: data => {
+        this.hoodies = data;
+        for (let i = 0; i < this.items.length; ++i) {
+          let a = 'data:image/png;base64,' + this.hoodies[i].image.img;
+          this.hoodies[i].image = a;
+          this.hoodiesToDisplay.push(this.hoodies[i]);
+        }
+
+      },
+      error: err => {
+        window.alert("Error");
+      }
+    }
+    this.shopService.getAllShirts().subscribe(observer);
   }
 }

@@ -16,6 +16,8 @@ import { LoginComponent } from './login/login.component';
 import { ShopComponent } from './shop/shop.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ErrorComponent } from './error/error.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { GenderPipe } from './pipes/gender.pipe';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { ErrorComponent } from './error/error.component';
     MainComponent,
     LoginComponent,
     ShopComponent,
-    ErrorComponent
+    ErrorComponent,
+    GenderPipe
   ],
   imports: [
     BrowserModule,
@@ -35,9 +38,10 @@ import { ErrorComponent } from './error/error.component';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgbModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,ErrorComponent]
 })
 export class AppModule { }

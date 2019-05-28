@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SignUpModel } from '../models/SignUpModel';
+import { SignUpModel, LogInModel } from '../models/SignUpModel';
 import { SignUpService } from '../services/sign-up.service';
 import { MatSnackBar,MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition, } from '@angular/material';
 import {Router} from '@angular/router';
+import {ErrorComponent} from "../error/error.component"
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +18,13 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   signUpForm: FormGroup;
+  logInUser: LogInModel = new LogInModel();
   signUpUser: SignUpModel = new SignUpModel();
   passwordPattern = "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.,\-_!])([a-zA-Z0-9 @#$%^&+=*.,\-_!]){8,}$/";
   config; 
 
   constructor(private signUpService: SignUpService, private snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router, private ngbModule:NgbModal) { }
 
 
 
@@ -42,7 +45,7 @@ export class LoginComponent implements OnInit {
       },
       error: err => {
         
-this.snackBar.open("Error", "Ok", this.config);
+window.alert("Error");
       }
     }
     this.signUpService.registerUser(this.signUpUser).subscribe(observer);
@@ -54,8 +57,23 @@ this.snackBar.open("Error", "Ok", this.config);
     this.signUpUser.LastName = "";
   }
 
+  logIn(form:NgForm){
+    const observer={
+      next:data=>{
+      localStorage.setItem("shopToken", data['access_token']);
+      this.router.navigateByUrl("/shop");
+      },
+      error: err=>{
+        const modalRef = this.ngbModule.open(ErrorComponent);
+        modalRef.componentInstance.error = "Please check your credentials";
+      }
+    }
+
+    this.signUpService.logInUser(this.logInUser).subscribe(observer);
+  }
+
   isUserLogged():boolean{
     let a = localStorage.getItem("shopToken");
-return localStorage.getItem("shopToken") == null ? true : false;
+return localStorage.getItem("shopToken") != null ? true : false;
   }
 }

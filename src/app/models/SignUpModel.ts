@@ -6,3 +6,8 @@ export class SignUpModel{
     FirstName:String;
     LastName:String;
 }
+
+export class LogInModel{
+    Email:String;
+    Password:String;
+}

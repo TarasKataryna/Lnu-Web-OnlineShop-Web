@@ -14,4 +14,8 @@ export class SignUpService {
   registerUser(model:SignUpModel):Observable<string>{
     return this.httpClient.post<string>("https://localhost:44382/api/User/SignUp", model);
   }
+
+  logInUser(model):Observable<string>{
+    return this.httpClient.post<string>("https://localhost:44382/api/User/LogIn", model);
+  }
 }

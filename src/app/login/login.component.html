@@ -46,7 +46,7 @@
 								<li *ngIf="isUserLogged()"><a routerLink="/account"><i class="fa fa-user"></i> Account</a></li>
 								<li><a routerLink="/shop"><i class="fa fa-crosshairs"></i> Home</a></li>
 								<li><a routerLink="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li *ngIf="!isUserLogged()"><a routerLink="/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+								<li *ngIf="isUserLogged() == false"><a routerLink="/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
 					</div>
@@ -96,9 +96,9 @@
 					<div class="login-form">
 						<!--login form-->
 						<h2>Login to your account</h2>
-						<form action="#">
-							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email Address" />
+						<form #logInForm="ngForm" (ngSubmit)="logIn(logInForm)">
+							<input type="email" [(ngModel)]="logInUser.Email" name="email"  placeholder="Email" />
+							<input type="password"  [(ngModel)]="logInUser.Password" name="password" placeholder="Password" />
 							<span>
 								<input type="checkbox" class="checkbox">
 								Keep me signed in

@@ -42,9 +42,9 @@
             <div class="shop-menu pull-right">
               <ul class="row">
                 <li *ngIf="isUserLogged()"><a routerLink="/account"><i class="fa fa-user"></i> Account</a></li>
-								<li><a routerLink="/shop"><i class="fa fa-crosshairs"></i> Home</a></li>
-								<li><a routerLink="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li *ngIf="!isUserLogged()"><a routerLink="/login" class="active"><i class="fa fa-lock"></i> Login</a></li>
+                <li><a routerLink="/shop"><i class="fa fa-crosshairs active"></i> Home</a></li>
+                <li><a routerLink="/cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                <li *ngIf="isUserLogged() == false"><a routerLink="/login"><i class="fa fa-lock"></i> Login</a></li>
               </ul>
             </div>
           </div>
@@ -90,85 +90,84 @@
         <div class="col-sm-3">
           <div class="left-sidebar">
             <h2>Category</h2>
-            <div class="panel-group category-products" id="accordian">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Clothing</a></h4>
+            <ul class="panel-group category-products" id="accordian">
+              <li class="panel panel-default ">
+                  <a class="panel-body" (click)="getMenShirts()">Men shirts</a>
+              </li>
+
+                <li class="panel panel-default">
+
+                  <a class="panel-body" (click)="getWomenShirts()">Women shirts</a>
+                </li>
+
+                <li class="panel panel-default">
+
+                  <a class="panel-body" (click)="getHoodies()">Hoodies</a>
+                </li>
+
+              </ul>
+              <!--/category-productsr-->
+
+              <div class="brands_products">
+                <!--brands_products-->
+                <h2>Brands</h2>
+                <div class="brands-name">
+                  <ul class="nav  nav-stacked">
+                    <li><a href=""> Acne</a></li>
+                    <li><a href=""> Grüne Erde</a></li>
+                    <li><a href=""> Albiro</a></li>
+                    <li><a href=""> Ronhill</a></li>
+                  </ul>
                 </div>
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Bags</a></h4>
+              <!--/brands_products-->
+
+              <div class="price-range">
+                <!--price-range-->
+                <h2>Price Range</h2>
+                <div class="well">
+                  <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
+                    data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
+                  <b>$ 0</b> <b class="pull-right">$ 600</b>
                 </div>
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title"><a href="#">Shoes</a></h4>
-                </div>
+              <!--/price-range-->
+
+              <div class="shipping text-center">
+                <!--shipping-->
+                <img src="images/home/shipping.jpg" alt="" />
               </div>
-            </div>
-            <!--/category-productsr-->
+              <!--/shipping-->
 
-            <div class="brands_products">
-              <!--brands_products-->
-              <h2>Brands</h2>
-              <div class="brands-name">
-                <ul class="nav  nav-stacked">
-                  <li><a href=""> Acne</a></li>
-                  <li><a href=""> Grüne Erde</a></li>
-                  <li><a href=""> Albiro</a></li>
-                  <li><a href=""> Ronhill</a></li>
-                </ul>
-              </div>
             </div>
-            <!--/brands_products-->
-
-            <div class="price-range">
-              <!--price-range-->
-              <h2>Price Range</h2>
-              <div class="well">
-                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5"
-                  data-slider-value="[250,450]" id="sl2"><br />
-                <b>$ 0</b> <b class="pull-right">$ 600</b>
-              </div>
-            </div>
-            <!--/price-range-->
-
-            <div class="shipping text-center">
-              <!--shipping-->
-              <img src="images/home/shipping.jpg" alt="" />
-            </div>
-            <!--/shipping-->
-
           </div>
-        </div>
 
-        <div class="col-sm-9 padding-right">
-          <div class="features_items">
-            <!--features_items-->
-            <h2 class="title text-center">Features Items</h2>
-            <div class="card-group">
-              <div class="col-3" *ngFor="let item of items" >
+          <div class="col-sm-9 padding-right">
+            <div class="features_items">
+              <!--features_items-->
+              <h2 class="title text-center">Features Items</h2>
+              <div class="card-group">
+                <div class="col-3" *ngFor="let item of items">
                   <img class="card-img-top" [src]="item.image" alt="Card image cap">
                   <div class="card-block">
                     <h4 class="card-title">{{item.name}}</h4>
                     <p class="card-text">{{item.name}}</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                   </div>
+                </div>
               </div>
+
+              <ul class=" pagination" id="shopPagination">
+                <li class="active"><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">&raquo;</a></li>
+              </ul>
             </div>
-            
-            <ul class=" pagination" id="shopPagination">
-              <li class="active"><a href="">1</a></li>
-              <li><a href="">2</a></li>
-              <li><a href="">3</a></li>
-              <li><a href="">&raquo;</a></li>
-            </ul>
+            <!--features_items-->
           </div>
-          <!--features_items-->
         </div>
       </div>
-    </div>
   </section>
 
   <footer id="footer">
