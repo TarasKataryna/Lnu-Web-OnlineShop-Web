@@ -19,6 +19,7 @@ import { ErrorComponent } from './error/error.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GenderPipe } from './pipes/gender.pipe';
 import { CartComponent } from './cart/cart.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { CartComponent } from './cart/cart.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
-    NgbModule
+    NgbModule,
+    MatListModule,
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent,ErrorComponent]
