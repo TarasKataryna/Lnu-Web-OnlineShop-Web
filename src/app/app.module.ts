@@ -18,6 +18,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ErrorComponent } from './error/error.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { GenderPipe } from './pipes/gender.pipe';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { GenderPipe } from './pipes/gender.pipe';
     LoginComponent,
     ShopComponent,
     ErrorComponent,
-    GenderPipe
+    GenderPipe,
+    CartComponent
   ],
   imports: [
     BrowserModule,

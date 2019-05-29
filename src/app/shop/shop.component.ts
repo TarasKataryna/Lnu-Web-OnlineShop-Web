@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../services/shop.service';
 import { ShirtModel } from '../models/ShirtModel';
+import {HoodyModel} from '../models/HoodyModel';
+import {ErrorComponent} from "../error/error.component"
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-shop',
@@ -9,7 +12,7 @@ import { ShirtModel } from '../models/ShirtModel';
 })
 export class ShopComponent implements OnInit {
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService, private ngbModule:NgbModal) { }
 
   ngOnInit() {
     this.items = [];
@@ -22,8 +25,8 @@ export class ShopComponent implements OnInit {
   public items: ShirtModel[];
   public itemsToDisplay: ShirtModel[];
 
-  public hoodies;
-  public hoodiesToDisplay;
+  public hoodies:HoodyModel[];
+  public hoodiesToDisplay:HoodyModel[];
 
   b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';
@@ -114,5 +117,23 @@ export class ShopComponent implements OnInit {
       }
     }
     this.shopService.getAllShirts().subscribe(observer);
+  }
+
+  AddToCart(id:Number){
+    let arr =  localStorage.getItem("productsInCart");
+    if(arr==null){
+      let array= [];
+      array.push(id);
+      localStorage.setItem("productsInCart",JSON.stringify(array));
+    }
+    else{
+      let array = JSON.parse(arr);
+      array.push(id);
+      localStorage.setItem("productsInCart",JSON.stringify(array));
+    }
+  }
+
+  openCart(){
+    
   }
 }
