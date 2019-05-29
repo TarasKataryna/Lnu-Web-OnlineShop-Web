@@ -92,17 +92,17 @@
             <h2>Category</h2>
             <ul class="panel-group category-products" id="accordian">
               <li class="panel panel-default ">
-                  <a class="panel-body" (click)="getMenShirts()">Men shirts</a>
+                  <button class="panel-body btn btn-default" (click)="getMenShirts()">Men shirts</button>
               </li>
 
                 <li class="panel panel-default">
 
-                  <a class="panel-body" (click)="getWomenShirts()">Women shirts</a>
+                  <button class="panel-body btn btn-default" (click)="getWomenShirts()">Women shirts</button>
                 </li>
 
                 <li class="panel panel-default">
 
-                  <a class="panel-body" (click)="getHoodies()">Hoodies</a>
+                  <button class="panel-body btn btn-default" (click)="getHoodies()">Hoodies</button>
                 </li>
 
               </ul>
@@ -151,8 +151,9 @@
                   <img class="card-img-top" [src]="item.image" alt="Card image cap">
                   <div class="card-block">
                     <h4 class="card-title">{{item.name}}</h4>
-                    <p class="card-text">{{item.name}}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text">{{item.name}} - {{item.brand}}</p>
+                    <p class="card-text">{{item.price}}</p>
+                    <a href="#" class="btn btn-primary" (click)="AddToCart(item.id)">Add to cart</a>
                   </div>
                 </div>
               </div>
